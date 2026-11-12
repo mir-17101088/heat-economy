@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://campaign.thedailystar.net/heat-economy/sitemap.xml
