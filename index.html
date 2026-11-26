@@ -1995,12 +1995,9 @@
 
     .m-dl {
       font: 700 24px var(--sans);
-      fill: var(--accent-ink);
+      fill: #C60001;
       text-anchor: middle;
-      paint-order: stroke;
-      stroke: var(--paper);
-      stroke-width: 5px;
-      stroke-linejoin: round
+      stroke: none
     }
 
     .m-l2 .m-dh {
@@ -2047,15 +2044,38 @@
     .m-lab {
       font-size: 24px;
       font-weight: 600;
-      fill: var(--text);
-      paint-order: stroke;
-      stroke: var(--paper);
-      stroke-width: 4px;
-      stroke-linejoin: round
+      fill: #101828;
+      stroke: none
     }
 
     .m-st {
       font-size: 30px
+    }
+
+    .m-lab.m-halo,
+    .m-dl.m-halo {
+      fill: none;
+      stroke: #FBFBFA;
+      stroke-width: 4px;
+      stroke-linejoin: round
+    }
+
+    .m-dl.m-halo {
+      stroke-width: 5px
+    }
+
+    :root[data-theme=dark] .m-lab {
+      fill: #EFEAE2
+    }
+
+    :root[data-theme=dark] .m-dl {
+      fill: #FF5A44
+    }
+
+    :root[data-theme=dark] .m-lab.m-halo,
+    :root[data-theme=dark] .m-dl.m-halo {
+      fill: none;
+      stroke: #181512
     }
 
     .map-key {
@@ -3561,6 +3581,24 @@
       margin-top: var(--sp)
     }
 
+    .chart+.prose,
+    .col--wide+.prose {
+      margin-top: var(--sp)
+    }
+
+    :root[data-theme=dark] .ac-lab,
+    :root[data-theme=dark] .im-amt {
+      fill: #D9D2C6;
+      stroke: #181512;
+      paint-order: stroke fill
+    }
+
+    :root[data-theme=dark] .ac-hlab {
+      fill: #FF5A44;
+      stroke: #181512;
+      paint-order: stroke fill
+    }
+
     figure.quote {
       margin-block: var(--sp)
     }
@@ -3698,28 +3736,49 @@
     .hm-svg text {
       font-family: var(--sans);
       text-anchor: middle;
-      pointer-events: none;
-      paint-order: stroke;
-      stroke: var(--paper);
-      stroke-linejoin: round;
-      stroke-width: calc(var(--hm-fs) * .2)
+      pointer-events: none
     }
 
     .hm-svg {
-      --hm-fs: 26px
+      --hm-fs: 26px;
+      --hm-sw: 5.2px
     }
 
-    .hm-n {
+    .hm-n,
+    .hm-nh {
       font-size: var(--hm-fs);
-      font-weight: 400;
-      fill: var(--text)
+      font-weight: 400
     }
 
-    .hm-v {
+    .hm-v,
+    .hm-vh {
       font-size: calc(var(--hm-fs) * 1.06);
       font-weight: 400;
-      fill: var(--text);
       font-variant-numeric: tabular-nums
+    }
+
+    .hm-n,
+    .hm-v {
+      fill: #101828;
+      stroke: none
+    }
+
+    .hm-nh,
+    .hm-vh {
+      fill: none;
+      stroke: #FBFBFA;
+      stroke-linejoin: round;
+      stroke-width: var(--hm-sw, 5.2px)
+    }
+
+    :root[data-theme=dark] .hm-n,
+    :root[data-theme=dark] .hm-v {
+      fill: #EFEAE2
+    }
+
+    :root[data-theme=dark] .hm-nh,
+    :root[data-theme=dark] .hm-vh {
+      stroke: #181512
     }
 
     .is-ex path {
@@ -5505,8 +5564,7 @@
                 </filter>
                 <filter id="hxm-grain" x="0%" y="0%" width="100%" height="100%">
                   <feTurbulence type="fractalNoise" baseFrequency=".32" numOctaves="4" seed="5" result="t" />
-                  <feColorMatrix in="t" type="matrix"
-                    values="0 0 0 0 .28  0 0 0 0 .25  0 0 0 0 .21  0 0 0 .24 0" />
+                  <feColorMatrix in="t" type="matrix" values="0 0 0 0 .28  0 0 0 0 .25  0 0 0 0 .21  0 0 0 .24 0" />
                 </filter>
                 <filter id="hxm-soft" x="-20%" y="-20%" width="140%" height="140%">
                   <feGaussianBlur stdDeviation=".22" />
@@ -5523,19 +5581,26 @@
                 <circle r="19" fill="url(#hxm-surf)" />
                 <g filter="url(#hxm-maria)">
                   <g fill="#7C7468" opacity=".46">
-                    <path d="M-13,-5 C-11.8,-12.2 -4.2,-15.4 1.2,-12 C4.2,-9.8 3,-4.8 -1,-2.8 C-5.2,-0.8 -11.8,-1.5 -13,-5 Z" />
-                    <path d="M1,-11.4 C5.4,-13.4 10.6,-10 10.2,-5 C9.4,-2 5.2,-0.8 2,-3.2 C-0.2,-5.4 -0.8,-9.2 1,-11.4 Z" />
+                    <path
+                      d="M-13,-5 C-11.8,-12.2 -4.2,-15.4 1.2,-12 C4.2,-9.8 3,-4.8 -1,-2.8 C-5.2,-0.8 -11.8,-1.5 -13,-5 Z" />
+                    <path
+                      d="M1,-11.4 C5.4,-13.4 10.6,-10 10.2,-5 C9.4,-2 5.2,-0.8 2,-3.2 C-0.2,-5.4 -0.8,-9.2 1,-11.4 Z" />
                     <path d="M1.8,-3.4 C6.4,-4.6 12.6,-2 13.2,3 C13.2,6.4 9.2,8.4 4.8,7 C1.6,5.2 -0.2,1 1.8,-3.4 Z" />
-                    <path d="M12.2,-6.8 C14.6,-7.2 16.2,-5.1 15.6,-2.5 C14.8,-1.1 12.6,-1.6 11.8,-3.5 C11.3,-5 11.4,-6.4 12.2,-6.8 Z" />
+                    <path
+                      d="M12.2,-6.8 C14.6,-7.2 16.2,-5.1 15.6,-2.5 C14.8,-1.1 12.6,-1.6 11.8,-3.5 C11.3,-5 11.4,-6.4 12.2,-6.8 Z" />
                     <path d="M8,4.8 C12.4,3.8 15.4,7 13.8,10.8 C11.6,12.8 7.8,11.8 6.4,9 C5.4,7.2 6.2,5.2 8,4.8 Z" />
-                    <path d="M-4.4,-1.2 C-1,-2.8 2.2,-1.2 2.5,2 C1.6,4.2 -2,4.6 -4.6,2.4 C-5.6,1 -5.2,-0.2 -4.4,-1.2 Z" />
-                    <path d="M-16.5,-1 C-14.2,-4.4 -8.8,-3.2 -6.8,1.2 C-5,5.4 -7.8,10.4 -12.2,10.2 C-16.4,8.2 -18.2,3 -16.5,-1 Z" />
+                    <path
+                      d="M-4.4,-1.2 C-1,-2.8 2.2,-1.2 2.5,2 C1.6,4.2 -2,4.6 -4.6,2.4 C-5.6,1 -5.2,-0.2 -4.4,-1.2 Z" />
+                    <path
+                      d="M-16.5,-1 C-14.2,-4.4 -8.8,-3.2 -6.8,1.2 C-5,5.4 -7.8,10.4 -12.2,10.2 C-16.4,8.2 -18.2,3 -16.5,-1 Z" />
                     <path d="M-10.2,8.4 C-7.4,7.4 -4.8,9 -5.4,12 C-6.8,13.4 -9.8,12.6 -10.8,10.4 Z" />
                   </g>
                   <g fill="#5C554B" opacity=".34">
-                    <path d="M-10.2,-6.2 C-9,-10.2 -3.8,-12.4 -0.4,-9.8 C1.4,-8.2 0.8,-4.8 -2.2,-3.6 C-5.4,-2.4 -9.6,-3.6 -10.2,-6.2 Z" />
+                    <path
+                      d="M-10.2,-6.2 C-9,-10.2 -3.8,-12.4 -0.4,-9.8 C1.4,-8.2 0.8,-4.8 -2.2,-3.6 C-5.4,-2.4 -9.6,-3.6 -10.2,-6.2 Z" />
                     <path d="M3,-9.2 C6.2,-10.6 8.8,-8.2 8.4,-5 C7.6,-3 4.8,-2.6 3,-4.2 C1.8,-5.8 1.8,-8.2 3,-9.2 Z" />
-                    <path d="M4.2,-1.4 C7.6,-2 11.4,0.2 11.6,3.4 C11.2,5.6 8.4,6.6 5.6,5.2 C3.4,3.8 2.6,0.4 4.2,-1.4 Z" />
+                    <path
+                      d="M4.2,-1.4 C7.6,-2 11.4,0.2 11.6,3.4 C11.2,5.6 8.4,6.6 5.6,5.2 C3.4,3.8 2.6,0.4 4.2,-1.4 Z" />
                     <path d="M12.8,-5.8 C14.4,-6 15.3,-4.5 14.8,-2.8 C14.2,-2.1 12.8,-2.4 12.4,-3.8 Z" />
                     <path d="M9.4,6.4 C11.8,6 13.4,7.8 12.4,9.8 C11.2,11 9,10.4 8.2,8.8 Z" />
                   </g>
@@ -5887,6 +5952,16 @@
           <div class="hm-stack"><svg class="hm-svg" viewBox="0 0 600 811" role="img"
               aria-label="Map of Bangladesh’s eight divisions, shaded by days a year that feel hotter than 35°C. The counts rise in every division from the 1950s to 2024.">
               <g id="hm-g"></g>
+              <g class="hm-vals-h" aria-hidden="true"><text class="hm-vh" x="298" y="634"></text><text class="hm-vh"
+                  x="445" y="510"></text><text class="hm-vh" x="271" y="416"></text><text class="hm-vh" x="172"
+                  y="552"></text><text class="hm-vh" x="320" y="278"></text><text class="hm-vh" x="137"
+                  y="339"></text><text class="hm-vh" x="176" y="174"></text><text class="hm-vh" x="490" y="319"></text>
+              </g>
+              <g class="hm-names-h" aria-hidden="true"><text class="hm-nh" x="298" y="608">Barishal</text><text
+                  class="hm-nh" x="445" y="484">Chattogram</text><text class="hm-nh" x="271" y="390">Dhaka</text><text
+                  class="hm-nh" x="172" y="526">Khulna</text><text class="hm-nh" x="320" y="252">Mymensingh</text><text
+                  class="hm-nh" x="137" y="313">Rajshahi</text><text class="hm-nh" x="176" y="148">Rangpur</text><text
+                  class="hm-nh" x="490" y="293">Sylhet</text></g>
               <g class="hm-vals" aria-hidden="true"><text class="hm-v" x="298" y="634"></text><text class="hm-v" x="445"
                   y="510"></text><text class="hm-v" x="271" y="416"></text><text class="hm-v" x="172"
                   y="552"></text><text class="hm-v" x="320" y="278"></text><text class="hm-v" x="137"
@@ -5998,9 +6073,12 @@
                   <circle class="q2" cx="283" cy="637" />
                   <circle class="q4" cx="487" cy="658" />
                   <circle class="q4" cx="502" cy="707" />
-                  <circle class="q2" cx="545" cy="785" /><text class="m-lab m-st" x="278" y="519"
-                    text-anchor="end">Barishal +54</text><text class="m-lab m-st" x="325" y="382">Dhaka +27</text><text
-                    class="m-lab m-st" x="261" y="647" text-anchor="end">Khepupara +14</text>
+                  <circle class="q2" cx="545" cy="785" /><text class="m-lab m-st m-halo" x="278" y="519"
+                    text-anchor="end" aria-hidden="true">Barishal +54</text><text class="m-lab m-st" x="278" y="519"
+                    text-anchor="end">Barishal +54</text><text class="m-lab m-st m-halo" x="325" y="382"
+                    aria-hidden="true">Dhaka +27</text><text class="m-lab m-st" x="325" y="382">Dhaka +27</text><text
+                    class="m-lab m-st m-halo" x="261" y="647" text-anchor="end" aria-hidden="true">Khepupara
+                    +14</text><text class="m-lab m-st" x="261" y="647" text-anchor="end">Khepupara +14</text>
                 </g>
                 <g class="m-ld" data-n="1">
                   <path
@@ -6027,15 +6105,21 @@
                   <circle cx="545" cy="785" />
                 </g>
                 <g class="m-lx" data-n="1">
-                  <circle class="q4" cx="307" cy="268" /><text class="m-dl" x="488" y="238" text-anchor="middle">
+                  <circle class="q4" cx="307" cy="268" /><text class="m-dl m-halo" x="488" y="238" text-anchor="middle"
+                    aria-hidden="true">
                     <tspan x="488">Mymensingh</tspan>
                     <tspan x="488" dy="30">division</tspan>
-                  </text><text class="m-lab m-st" x="285" y="254" text-anchor="end">Mymensingh +36</text>
+                  </text><text class="m-dl" x="488" y="238" text-anchor="middle">
+                    <tspan x="488">Mymensingh</tspan>
+                    <tspan x="488" dy="30">division</tspan>
+                  </text><text class="m-lab m-st m-halo" x="285" y="254" text-anchor="end" aria-hidden="true">Mymensingh
+                    +36</text><text class="m-lab m-st" x="285" y="254" text-anchor="end">Mymensingh +36</text>
                 </g>
                 <g class="m-l2" data-n="2">
                   <circle class="m-glow" cx="301" cy="394" r="34" />
                   <circle class="m-glow m-glow2" cx="301" cy="394" r="34" />
-                  <circle class="m-dh" cx="301" cy="394" r="13" /><text class="m-lab" x="331" y="380"
+                  <circle class="m-dh" cx="301" cy="394" r="13" /><text class="m-lab m-halo" x="331" y="380"
+                    text-anchor="start" aria-hidden="true">Dhaka</text><text class="m-lab" x="331" y="380"
                     text-anchor="start">Dhaka</text>
                 </g>
                 <rect class="m-pick" width="600" height="811" />
@@ -7522,8 +7606,8 @@
           conditioners.</p>
         <p>“Local manufacturers are now producing almost everything, from fins and plastic moulds to pipes and wiring,
           with local value addition reaching nearly 40 percent,” he said.</p>
-        <p>But as domestic factories make air conditioners and other cooling appliances more accessible, each new unit
-          adds demand to a national grid already straining under extreme heat.</p>
+        <p>However, the expansion of local manufacturing is making cooling appliances more accessible, but the growing
+          use of air conditioners is also adding to electricity demand during the hottest months.</p>
         <p>A Daily Star analysis of Power Grid Bangladesh data for 2026 shows electricity shortfalls rising in step with
           nighttime temperatures. The cuts peak after midnight when people try to sleep, fall far more heavily on some
           distribution zones than others, and have run much deeper than in the previous two years.</p>
@@ -7979,7 +8063,7 @@
         stroke-linejoin="round" />
     </svg></button>
   <script src="js/app.0191df9a.js" defer></script>
-  <script src="js/heat.a39e02ff.js" defer></script>
+  <script src="js/heat.94abed7b.js" defer></script>
   <script src="js/hero.1f152172.js" defer></script>
   <script src="js/motion.832a09df.js" defer></script>
   <script src="js/power.da39a3ee.js" defer></script>
